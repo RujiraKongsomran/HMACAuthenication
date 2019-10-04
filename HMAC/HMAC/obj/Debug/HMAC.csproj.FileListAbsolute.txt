@@ -5,3 +5,15 @@ C:\Users\biwbe\source\repos\HMAC\HMAC\obj\Debug\HMAC.csprojAssemblyReference.cac
 C:\Users\biwbe\source\repos\HMAC\HMAC\obj\Debug\HMAC.csproj.CoreCompileInputs.cache
 C:\Users\biwbe\source\repos\HMAC\HMAC\obj\Debug\HMAC.exe
 C:\Users\biwbe\source\repos\HMAC\HMAC\obj\Debug\HMAC.pdb
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\bin\Debug\HMAC.exe.config
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\bin\Debug\HMAC.exe
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\bin\Debug\HMAC.pdb
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\obj\Debug\HMAC.csprojAssemblyReference.cache
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\obj\Debug\HMAC.csproj.CoreCompileInputs.cache
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\obj\Debug\HMAC.exe
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\obj\Debug\HMAC.pdb
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\bin\Debug\Newtonsoft.Json.dll
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\bin\Debug\Newtonsoft.Json.xml
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\obj\Debug\HMAC.csproj.CopyComplete
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\bin\Debug\RestSharp.dll
+C:\Users\biwbe\Desktop\HMACAuthen\HMAC\HMAC\bin\Debug\RestSharp.xml
