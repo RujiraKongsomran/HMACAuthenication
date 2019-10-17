@@ -11,6 +11,8 @@ using System.Security.Cryptography;
 using System.Globalization;
 using Newtonsoft.Json;
 using RestSharp;
+using HMAC.Model;
+using System.Web.Script.Serialization;
 
 namespace HMAC
 {
@@ -61,7 +63,7 @@ namespace HMAC
             // customize header to send HMAC
             string requestHttpMethod = "GET";
             //string requestPath = "/disease/0000234F/from/1569888000/to/1570169619";
-            string requestPath = "/system/types";
+            string requestPath = "/disease/0000234F/last/1w";
 
             // UTC 0
             DateTimeOffset date = DateTimeOffset.UtcNow;
@@ -84,7 +86,7 @@ namespace HMAC
 
             //var client = new RestClient("https://api.fieldclimate.com/v1/disease/0000234F/from/1569888000/to/1570169619");
 
-            var client = new RestClient("https://api.fieldclimate.com/v1/system/types");
+            var client = new RestClient("https://api.fieldclimate.com/v1/disease/0000234F/last/1w");
             var request = new RestRequest(Method.GET);
             request.AddHeader("Date", requestTimeStamp);
             request.AddHeader("content-type", "application/json");
@@ -101,9 +103,23 @@ namespace HMAC
                 // Process JSON here
                 // Print status code and response
                 Console.WriteLine("Status {0}:{1}", response.StatusCode, JsonHelper.FormatJson(responseString));
-                TCP_Socket tcp = new TCP_Socket("192.168.1.66",8888,1);
+
+                // Convert JSON String to Object
+                List<JSONGetLastETo.RootObject> lastETo = new List<JSONGetLastETo.RootObject>();
+                lastETo = JsonConvert.DeserializeObject<List<JSONGetLastETo.RootObject>>(responseString);
+
+                TCP_Socket tcp = new TCP_Socket("192.168.1.66", 8888, 1);
                 tcp.Connect();
-                tcp.SendData(responseString,false);
+
+                // Loop send to GeoEvent Server
+                for (int i = 0; i <= lastETo.Count - 1; i++)
+                {
+                    string dateETo = lastETo[i].date.ToString();
+                    string valueEto = lastETo[i].eto.ToString();
+                    string data = string.Format("{0},{1}", dateETo, valueEto);
+                    tcp.SendData(data, false);
+                }
+                tcp.Disconnect();
             }
             else
             {
