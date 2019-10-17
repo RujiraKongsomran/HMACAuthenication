@@ -59,8 +59,9 @@ namespace HMAC
             CultureInfo enUsCulture = new CultureInfo("en-us"); // 2019
 
             // customize header to send HMAC
-            string requestHttpMethod = "PUT";
-            string requestPath = "/user";
+            string requestHttpMethod = "GET";
+            //string requestPath = "/disease/0000234F/from/1569888000/to/1570169619";
+            string requestPath = "/system/types";
 
             // UTC 0
             DateTimeOffset date = DateTimeOffset.UtcNow;
@@ -81,12 +82,16 @@ namespace HMAC
                 authorization = "hmac " + string.Format("{0}:{1}", publicKey, requestSignatureString);
             }
 
-            var client = new RestClient("https://api.fieldclimate.com/v1/user");
-            var request = new RestRequest(Method.PUT);
+            //var client = new RestClient("https://api.fieldclimate.com/v1/disease/0000234F/from/1569888000/to/1570169619");
+
+            var client = new RestClient("https://api.fieldclimate.com/v1/system/types");
+            var request = new RestRequest(Method.GET);
             request.AddHeader("Date", requestTimeStamp);
             request.AddHeader("content-type", "application/json");
             request.AddHeader("Authorization", authorization);
-            request.AddParameter("application/json", "{\r\n    \"username\" :\"Kubota\",\r\n    \"info.name\" : \"Vishnu\",\r\n    \"info.phone\": \"0900000099\"\r\n}", ParameterType.RequestBody);
+            request.AddParameter("application/json", "{" +
+                "  \"name\":\"disease, Rice\\/SheathBlight\"" +
+                "}", ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
 
             if (response.IsSuccessful)
@@ -96,6 +101,9 @@ namespace HMAC
                 // Process JSON here
                 // Print status code and response
                 Console.WriteLine("Status {0}:{1}", response.StatusCode, JsonHelper.FormatJson(responseString));
+                TCP_Socket tcp = new TCP_Socket("192.168.1.66",8888,1);
+                tcp.Connect();
+                tcp.SendData(responseString,false);
             }
             else
             {
